@@ -11,7 +11,8 @@ var taikhoanRouter = require("./routers/taikhoan");
 var baivietRouter = require("./routers/baiviet");
 
 // Thay đổi chuỗi URI này
-var uri = "mongodb+srv://admin:123@ac-vimxwof.rinll5o.mongodb.net/trangtin?retryWrites=true&w=majority";
+var uri =
+  "mongodb://admin:123@ac-vimxwof-shard-00-01.rinll5o.mongodb.net:27017/trangtin?ssl=true&authSource=admin";
 
 mongoose
   .connect(uri) // Quan trọng: Phải truyền biến uri vào đây
