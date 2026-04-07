@@ -10,15 +10,17 @@ var chudeRouter = require("./routers/chude");
 var taikhoanRouter = require("./routers/taikhoan");
 var baivietRouter = require("./routers/baiviet");
 
-var uri =
-  "mongodb://admin:123@ac-vimxwof-shard-00-01.rinll5o.mongodb.net:27017/trangtin?ssl=true&authSource=admin";
+// Thay đổi chuỗi URI này
+var uri = "mongodb+srv://admin:123@ac-vimxwof.rinll5o.mongodb.net/trangtin?retryWrites=true&w=majority";
+
 mongoose
-  .connect(uri)
-  .then(async () => {
+  .connect(uri) // Quan trọng: Phải truyền biến uri vào đây
+  .then(() => {
     console.log("Kết nối database thành công!");
-    console.log("Đã thêm dữ liệu vào database");
   })
-  .catch((err) => console.log(err));
+  .catch((err) => {
+    console.log("Lỗi kết nối: ", err.message);
+  });
 
 app.set("views", "./views");
 app.set("view engine", "ejs");
