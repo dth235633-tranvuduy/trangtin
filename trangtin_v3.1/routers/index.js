@@ -4,6 +4,11 @@ var firstImage = require("../modules/firstimage");
 var ChuDe = require("../models/chude");
 var BaiViet = require("../models/baiviet");
 
+function normalizeLocalUrls(html) {
+  if (!html) return html;
+  return html.replace(/https?:\/\/(127\.0\.0\.1|localhost)(:\d+)?/gi, "");
+}
+
 // GET: Trang chủ
 router.get("/", async (req, res) => {
   // Lấy chuyên mục hiển thị vao menu
@@ -82,6 +87,10 @@ router.get("/baiviet/chitiet/:id", async (req, res) => {
     .populate("ChuDe")
     .populate("TaiKhoan")
     .exec();
+
+  if (bv && bv.NoiDung) {
+    bv.NoiDung = normalizeLocalUrls(bv.NoiDung);
+  }
 
   // Xử lý tăng lượt xem bài viết
 
